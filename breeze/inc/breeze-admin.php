@@ -95,6 +95,8 @@ class Breeze_Admin {
 	 * Check the page status and if the current page is
 	 * in the excluded ecommerce pages list.
 	 *
+	 * Clears the cache when a scheduled post get's published.
+	 *
 	 * @param string $new_status
 	 * @param string $old_status
 	 * @param object $post
@@ -107,6 +109,12 @@ class Breeze_Admin {
 
 		if ( $new_status != $old_status && Breeze_Ecommerce_Cache::is_excluded_ecom_page( $post->ID ) ) {
 			Breeze_ConfigCache::write_config_cache();
+		}
+		// Clear cache when a scheduled post get's published.
+		if ( 'future' === $old_status && 'publish' === $new_status ) {
+			do_action( 'breeze_clear_varnish' );
+			Breeze_PurgeCache::breeze_cache_flush();
+			Breeze_MinificationCache::clear_minification();
 		}
 	}
 
@@ -1218,6 +1226,7 @@ INLINEJS;
 				delete_site_option( 'breeze_ecommerce_detect' );
 				delete_site_option( 'breeze_exclude_url_pages' );
 				delete_site_option( 'breeze_hide_notice' );
+				delete_site_option( 'breeze_version' );
 
 				// Delete options for each sub-blog.
 				foreach ( $sites as $blog_id ) {
@@ -1237,6 +1246,7 @@ INLINEJS;
 					delete_option( 'breeze_ecommerce_detect' );
 					delete_option( 'breeze_exclude_url_pages' );
 					delete_option( 'breeze_hide_notice' );
+					delete_option( 'breeze_version' );
 					restore_current_blog();
 				}
 			} else {
@@ -1256,6 +1266,7 @@ INLINEJS;
 				delete_option( 'breeze_ecommerce_detect' );
 				delete_option( 'breeze_exclude_url_pages' );
 				delete_option( 'breeze_hide_notice' );
+				delete_option( 'breeze_version' );
 			}
 		}
 	}
