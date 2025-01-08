@@ -42,10 +42,15 @@ class Breeze_ConfigCache {
 			'breeze-config' => array(),
 		);
 		if ( is_multisite() ) {
-			// This is a multisite install, loop through all subsites.
+			/**
+			 * This is a multisite install, loop through all subsites.
+			 * Use the given filter to define the number of subsites
+			 * to fetch default is 100.
+			 */
 			$blogs = get_sites(
 				array(
 					'fields' => 'ids',
+					'number' => apply_filters( 'breeze_subsites_fetch_count_modify', 100 ),
 				)
 			);
 
@@ -575,7 +580,7 @@ FILE_STRING;
 
 		$config_file_string = '<?php ' . "\n\r" . "defined( 'ABSPATH' ) || exit;" . "\n\r" . 'return ' . var_export( $config, true ) . '; ' . "\n\r";
 
-		return $wp_filesystem->put_contents( $config_file, $config_file_string );
+		return $wp_filesystem->put_contents( $config_file, $config_file_string, FS_CHMOD_FILE );
 	}
 
 	/**
