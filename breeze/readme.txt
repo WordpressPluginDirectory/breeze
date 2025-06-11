@@ -2,9 +2,9 @@
 Contributors: Cloudways
 Tags: cache,caching, performance, wp-cache, cdn
 Requires at least: 6.0
-Tested up to: 6.7
+Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 2.2.10
+Stable tag: 2.2.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,13 +160,24 @@ Using Gzip, Breeze compresses the request files, further reducing the size of th
 
 == Changelog ==
 
+= 2.2.12 =
+
+* Fix: Resolved an issue where Lazy Load and Cross-Origin options caused HTML entities to remain encoded on the front-end.
+* Fix: Corrected a bug where the breeze_clear_remote_gravatar cron event was not removed upon Breeze plugin uninstallation.
+
+= 2.2.11 =
+
+* Fix: Cache was not purged automatically during Breeze plugin updates.
+* Add: Clearing Elementor cache will also clear Breeze cache.
+* Changed: Updated lazy load initialization and improved iframe handling to better align with browser-native lazy loading behavior.
+
 = 2.2.10 =
 
 * Added: native lazy loading support for iframe elements.
 * Added: Implemented lazy load support for video elements with multiple source tags.
 * Added: Introduced .webp format support for lazy loading images.
 * Changed: Switched from lazysizes to Vanilla LazyLoad, reducing the lazy load library's footprint.
-* Improved: Updated lazy load placeholders to use Base64-encoded inline images for improved performance
+* Improved: Updated lazy load placeholders to use Base64-encoded inline images for improved performance.
 
 = 2.2.9 =
 
