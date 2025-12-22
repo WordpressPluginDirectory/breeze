@@ -407,19 +407,12 @@ jQuery( document ).ready(
 			'change',
 			'#breeze-enable-api',
 			function () {
-				var secure_api = $( '#breeze-secure-api' );
 				var token_api  = $( '#breeze-api-token' );
-				//var api_route = $( '#breeze-secure-api' );
 
 				if ( $( this ).is( ':checked' ) ) {
-					secure_api.closest( 'div.br-option-item' ).removeClass( 'br-apply-disable' );
 					token_api.closest( 'div.br-option-item' ).removeClass( 'br-apply-disable' );
 				} else {
-					secure_api.closest( 'div.br-option-item' ).addClass( 'br-apply-disable' );
 					token_api.closest( 'div.br-option-item' ).addClass( 'br-apply-disable' );
-
-					secure_api.prop( 'checked', false );
-					//token_api.trigger( 'change' );
 				}
 			}
 		);
@@ -1693,6 +1686,64 @@ jQuery( document ).ready(
 					}
 				}
 			);
+		}
+	);
+
+	$container_box.on(
+		'click',
+		'#copy-api-token',
+		function ( e ) {
+			e.preventDefault();
+
+			var tokenInput = $( '#breeze-api-token' );
+			var token = tokenInput.val();
+
+			if ( token ) {
+				// Use the Clipboard API if available
+				if ( navigator.clipboard && navigator.clipboard.writeText ) {
+					navigator.clipboard.writeText( token ).then(
+						function () {
+							// Show success feedback
+							var copyBtn = $( '#copy-api-token' );
+							var originalTitle = copyBtn.attr( 'title' );
+							copyBtn.attr( 'title', 'Copied!' );
+							copyBtn.find( '.dashicons' ).removeClass( 'dashicons-clipboard' ).addClass( 'dashicons-yes' );
+
+							// Reset after 2 seconds
+							setTimeout(
+								function () {
+									copyBtn.attr( 'title', originalTitle );
+									copyBtn.find( '.dashicons' ).removeClass( 'dashicons-yes' ).addClass( 'dashicons-clipboard' );
+								},
+								2000
+							);
+						},
+						function ( err ) {
+							// Fallback if clipboard API fails
+							console.error( 'Failed to copy token: ', err );
+						}
+					);
+				} else {
+					// Fallback for older browsers
+					tokenInput.select();
+					document.execCommand( 'copy' );
+
+					// Show success feedback
+					var copyBtn = $( '#copy-api-token' );
+					var originalTitle = copyBtn.attr( 'title' );
+					copyBtn.attr( 'title', 'Copied!' );
+					copyBtn.find( '.dashicons' ).removeClass( 'dashicons-clipboard' ).addClass( 'dashicons-yes' );
+
+					// Reset after 2 seconds
+					setTimeout(
+						function () {
+							copyBtn.attr( 'title', originalTitle );
+							copyBtn.find( '.dashicons' ).removeClass( 'dashicons-yes' ).addClass( 'dashicons-clipboard' );
+						},
+						2000
+					);
+				}
+			}
 		}
 	);
 

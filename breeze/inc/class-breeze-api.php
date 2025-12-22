@@ -25,7 +25,7 @@ class Breeze_Api_Handler {
 
 	public function breeze_clear_cache( $request ) {
 
-		if ( $this->options["breeze-secure-api"] && $this->options["breeze-api-token"] != $request->get_param( 'key' ) ) {
+		if ( $this->options["breeze-api-token"] != $request->get_param( 'key' ) ) {
 			// Access is denied, set status code to 403 (Forbidden)
 			$status_code   = 403;
 			$response_data = array(

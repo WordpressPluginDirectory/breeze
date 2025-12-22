@@ -747,7 +747,6 @@ INLINEJS;
 			'breeze-store-facebookpixel-locally'   => '0',
 			'breeze-store-gravatars-locally'       => '0',
 			'breeze-enable-api'                    => '0',
-			'breeze-secure-api'                    => '0',
 			'breeze-api-token'                     => $token,
 		);
 		$default_data['advanced'] = array_merge( $default_advanced, $advanced );

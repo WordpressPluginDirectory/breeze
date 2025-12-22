@@ -384,7 +384,6 @@ class Breeze_Configuration {
 			'breeze-store-facebookpixel-locally'   => ( isset( $_POST['breeze-store-facebookpixel-locally'] ) ? '1' : '0' ),
 			'breeze-store-gravatars-locally'       => ( isset( $_POST['breeze-store-gravatars-locally'] ) ? '1' : '0' ),
 			'breeze-enable-api'                    => ( isset( $_POST['breeze-enable-api'] ) ? '1' : '0' ),
-			'breeze-secure-api'                    => ( isset( $_POST['breeze-secure-api'] ) ? '1' : '0' ),
 			'breeze-api-token'                     => sanitize_text_field( $breeze_api_token ),
 		);
 
@@ -1814,7 +1813,7 @@ class Breeze_Configuration {
 	 * @return string
 	 * @throws Exception
 	 */
-	public function breeze_generate_token( $length = 12 ) {
+	public function breeze_generate_token( $length = 32 ) {
 		$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 		$token      = '';
 
@@ -1954,7 +1953,6 @@ class Breeze_Configuration {
 			'cached-query-strings' => array(),
 			'breeze-wp-emoji'      => '0',
 			'breeze-enable-api'    => '0',
-			'breeze-secure-api'    => '0',
 			'breeze-api-token'     => $token,
 		);
 		$default_heartbeat = array(
