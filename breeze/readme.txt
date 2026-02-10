@@ -1,18 +1,18 @@
-=== Breeze - WordPress Cache Plugin ===
+=== Breeze Cache ===
 Contributors: Cloudways
 Tags: cache,caching, performance, wp-cache, cdn
 Requires at least: 6.0
-Tested up to: 6.8.2
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.2.22
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Breeze is a WordPress Caching Plugin developed by Cloudways. Breeze uses advance caching systems to improve WordPress loading times exponentially.
+Breeze is a caching plugin developed by Cloudways. Breeze uses advance caching systems to improve site loading times exponentially.
 
 == Description ==
 
-Breeze is a free, simple (yet powerful) and user-friendly WordPress Caching Plugin developed by the Cloudways team. It offers various options to optimize WordPress performance at various levels. It works equally great with WordPress, WordPress with WooCommerce and WordPress Multisite.
+Breeze is a free, simple (yet powerful) and user-friendly caching plugin developed by the Cloudways team. It offers various options to optimize WordPress site performance at various levels. It works equally great with WordPress, WordPress with WooCommerce and WordPress Multisite.
 
 Breeze excels in the following areas:
 
@@ -22,7 +22,7 @@ Breeze excels in the following areas:
 
 * **Simplicity:** Breeze is designed to be simple for all users. Just install and activate the plugin and you'll see the results instantaneously.
 
-What makes Breeze WordPress Cache Plugin awesome is that it comes with builtin support for Varnish. If Varnish is not installed on your servers, Breeze will utilize its internal cache mechanism to boost up your WordPress site performance.
+What makes Breeze Cache Plugin awesome is that it comes with builtin support for Varnish. If Varnish is not installed on your servers, Breeze will utilize its internal cache mechanism to boost up your WordPress site performance.
 
 **FEATURES**
 
@@ -35,7 +35,7 @@ What makes Breeze WordPress Cache Plugin awesome is that it comes with builtin s
 * Load images when they're visible, not all at once, for faster webpage performance by implementing lazy loading for images.
 * Load JS files with deferred loading, enhancing overall performance.
 * Supercharge your site's speed with Breeze's advanced preloading features: load fonts early, quicken link clicks, and enhance DNS requests for a seamless user experience.
-* Master real-time interactions with Breeze's Heartbeat API management. Fine-tune notifications, sales data, autosaves, and more to optimize WordPress performance by adjusting API call frequencies.
+* Master real-time interactions with Breeze's Heartbeat API management. Fine-tune notifications, sales data, autosaves, and more to optimize WordPress website performance by adjusting API call frequencies.
 * Effortlessly manage Breeze settings using Import/Export. Download your configurations as a .json file for backup, or effortlessly import existing settings to quickly fine-tune your optimization.
 
 
@@ -52,7 +52,7 @@ What makes Breeze WordPress Cache Plugin awesome is that it comes with builtin s
 = To install the plugin manually: =
 * Download and unzip the plugin package - breeze.1.0.0.zip
 * Upload the breeze to /wp-content/plugins/
-* Activate the plugin through the 'Plugins' menu in WordPress
+* Activate the plugin through the 'Plugins' menu in WordPress Dashboard
 * Access Breeze from WordPress Admin > Settings > Breeze
 
 == Frequently Asked Questions ==
@@ -67,7 +67,7 @@ To install the plugin via WordPress Dashboard
 To install the plugin manually
 1. Download and unzip the plugin package - breeze.1.0.0.zip
 2. Upload the /breeze to /wp-content/plugins/
-3. Activate the plugin through the 'Plugins' menu in WordPress
+3. Activate the plugin through the 'Plugins' menu in WordPress Dashboard
 4. Access Breeze from WordPress Admin > Settings > Breeze
 
 = Does Breeze support Varnish and to what extent? =
@@ -82,11 +82,11 @@ Breeze is fully compatible with WooCommerce, out of the box. It does not require
 
 Breeze is fully compatible with WordPress Multisite without the need for any extra configuration.
 
-= How does Breeze handle WordPress multisite? =
+= How does Breeze handle WordPress Mltisite? =
 
-Breeze handles all WordPress multisite instances globally. All the settings for multisite are now handled on the network level.
+Breeze handles all WordPress Multisite instances globally. All the settings for multisite are now handled on the network level.
 
-= Is Breeze compatible with other WordPress Cache plugins? =
+= Is Breeze compatible with other WordPress cache plugins? =
 
 We DO NOT recommend using two WordPress cache plugins at the same time on any WordPress website.
 We strongly recommend that you use Breeze as the only cache plugin for your website. If there are any other cache plugins installed, please ensure that you have disabled them prior to proceeding with the Breeze installation.
@@ -159,6 +159,39 @@ Yes. The process of setting up CloudFlare with Breeze is easy. Check out the fol
 Using Gzip, Breeze compresses the request files, further reducing the size of the download files and speeding up the user experience.
 
 == Changelog ==
+
+= 2.3.1 =
+
+* Fix: Varnish purge success notice now shows the correct message instead of an empty notice.
+
+= 2.3.0 =
+
+* Fix: URLs excluded from cache that contain hash (#) fragments are now correctly skipped during preload.
+* Fix: Modified regex to better fetch images through CSS classes.
+* Fix: Corrected warnings and errors to follow WordPress coding rules.
+* Fix: Resolved SyntaxError occurring when the native lazyload option is enabled.
+* Fix: Resolved a "Double-Compression" conflict on WordPress Multisite environments using Varnish. Breeze now detects the X-Varnish header and intelligently bypasses PHP-level Gzip to prevent malformed HTML streams.
+* Fix: Prevented redundant Cloudflare cache purge requests from triggering multiple times during a single post update.
+* Fix: Resolved an issue where the "Preload Links" feature caused WooCommerce cart items to be removed automatically upon hovering over the "Remove" button.
+* Fix: Improved screen detection logic for the Breeze back‑end CSS file, ensuring it loads correctly in all relevant admin contexts.
+* Fix: Removed the multisite sub‑site limit. The system previously enforced a default maximum of 100 sub‑sites.
+* Improved: Refined .htaccess rule syntax and underlying logic. In certain rare cases, the previous implementation could trigger a 500 server error.
+* Improved: Optimized performance for post updates and WooCommerce order processing by offloading Cloudflare cache purges to a background cron job.
+* Added: Control PHP Gzip compression programmatically with breeze_should_gzip_output filter
+* Added: Introduced breeze_cf_purge_type_on_post_update and breeze_cf_purge_type_on_order_update filters to programmatically toggle between background (cron) and synchronous (default) purging.
+* Added: Introduced the breeze_purge_post_cache_urls filter, allowing developers to programmatically add extra URLs to the purge queue. When using this filter, ensure all custom URLs are returned with a trailing slash (/).
+
+= 2.2.24 =
+
+* Improved: Added caching for database queries to enhance performance and reduce database load.
+* Fix: Resolved WordPress Coding Standards warnings and errors
+
+= 2.2.23 =
+
+* Fix: Plugin name now complies with WordPress plugin directory guidelines.
+* Fix: API keys with insufficient strength are now rejected, and a visual strength indicator is shown to guide users.
+* Fix: The cache‑clearing API now validates API keys only when provided via the 'Authorization: Bearer <•••key•••>' header.
+* Fix: Enhanced security measures applied to the clear‑cache API endpoint.
 
 = 2.2.22 =
 
@@ -816,3 +849,5 @@ Update Breeze through WordPress Admin > Dashboard >Updates. The settings will re
 
 
 PHP 7.4, PHP 8 recommended for better performance, WordPress 6.0+
+
+
