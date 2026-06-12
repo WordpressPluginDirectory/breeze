@@ -2,9 +2,9 @@
 Contributors: Cloudways
 Tags: cache,caching, performance, wp-cache, cdn
 Requires at least: 6.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.5.1
+Stable tag: 2.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,20 +160,25 @@ Using Gzip, Breeze compresses the request files, further reducing the size of th
 
 == Changelog ==
 
-= 2.5.1 =
+= 2.5.6 =
 
-* Fix: Images no longer fail to load when the "Lazy load" option is enabled. The bundled lazy-load library file was empty in 2.5.0 and has been restored.
+* Improvement: Enhanced comment section handling when HTML minification is enabled to improve compatibility and output reliability
 
-= 2.5.0 =
+= 2.5.5 =
 
-* Fix: DNS Prefetch no longer chops off the first letter of domain names.
-* New: Smart Cache Protection automatically pauses caching when errors are detected, keeping your site responsive.
-* Improvement: Minification is paused while Smart Cache Protection is active to save resources.
-* Improvement: Minification now skips form submissions and other non-page requests, making your site lighter and faster.
-* Fix: Cache files are now written safely, preventing corruption under heavy traffic.
-* Improvement: Cache error logs now include the page URL and free disk space for easier troubleshooting.
-* New: Added 304 Not Modified support. Returning visitors get an instant response instead of re-downloading unchanged pages, saving bandwidth.
-* Improvement: Faster cache lookups using a shorter, quicker key for cached page filenames.
+* Fix: Cloudflare cache now reliably purges when scheduled posts are published, ensuring newly published content is immediately visible without waiting for the cache to expire.
+
+= 2.5.4 =
+
+* Fix: Improved handling of locally stored remote files using WordPress standard APIs.
+* Fix: Improved query string cache processing and variation handling.
+* Improved: Enhanced validation handling during settings import.
+* Improved: Enhanced cache handling for navigation menus when menus are created, updated, or deleted.
+* Added: Support for additional ignored query string parameters.
+
+= 2.5.3 =
+
+* Compatibility: Verified compatibility with WordPress 7.0.
 
 
 [See changelog for all versions](https://plugins.svn.wordpress.org/breeze/trunk/changelog.txt)

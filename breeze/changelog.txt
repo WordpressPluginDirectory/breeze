@@ -1,5 +1,30 @@
 == Changelog ==
 
+= 2.5.6 =
+
+* Improvement: Enhanced comment section handling when HTML minification is enabled to improve compatibility and output reliability
+
+= 2.5.5 =
+
+* Fix: Cloudflare cache now reliably purges when scheduled posts are published, ensuring newly published content is immediately visible without waiting for the cache to expire.
+
+= 2.5.4 =
+
+* Fix: Improved handling of locally stored remote files using WordPress standard APIs.
+* Fix: Improved query string cache processing and variation handling.
+* Improved: Enhanced validation handling during settings import.
+* Improved: Enhanced cache handling for navigation menus when menus are created, updated, or deleted.
+* Added: Support for additional ignored query string parameters.
+
+= 2.5.3 =
+
+* Compatibility: Verified compatibility with WordPress 7.0.
+
+= 2.5.2 =
+
+* Improved: Refined multisite handling across settings, cache management, import/export, and reset actions for more consistent behavior and better scope control.
+* Improved: Enhanced cache handling and validation for more reliable content delivery and request processing.
+
 = 2.5.1 =
 
 * Fix: Images no longer fail to load when the "Lazy load" option is enabled. The bundled lazy-load library file was empty in 2.5.0 and has been restored.
